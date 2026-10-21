@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: writing
+      POSTGRES_USER: writing
+      POSTGRES_PASSWORD: writing
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U writing -d writing"]
+      interval: 5s
+      retries: 10
+
+  inference:
+    build: ./inference-service
+    ports:
+      - "8000:8000"
+
+  backend:
+    build: ./backend
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/writing
+      DB_USER: writing
+      DB_PASSWORD: writing
+      INFERENCE_URL: http://inference:8000
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      inference:
+        condition: service_healthy

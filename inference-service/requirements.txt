@@ -1,0 +1,5 @@
+fastapi==0.156.4
+uvicorn[standard]==0.54.0
+pydantic==2.14.1
+# CPU build of PyTorch (installed from the PyTorch index, see Dockerfile and CI)
+torch==2.12.1
