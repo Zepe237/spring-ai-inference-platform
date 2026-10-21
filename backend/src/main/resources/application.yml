@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: writing-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/writing}
+    username: ${DB_USER:writing}
+    password: ${DB_PASSWORD:writing}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  mvc:
+    problemdetails:
+      enabled: true
+  http:
+    client:
+      connect-timeout: 2s
+      read-timeout: 5s
+
+inference:
+  base-url: ${INFERENCE_URL:http://localhost:8000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
