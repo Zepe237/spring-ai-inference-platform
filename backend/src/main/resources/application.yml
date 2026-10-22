@@ -14,6 +14,9 @@ spring:
       enabled: true
   http:
     client:
+      # Plain HTTP/1.1 client (HttpURLConnection). The default JDK HttpClient tries an
+      # h2c upgrade on http:// URLs, which uvicorn rejects, so the JSON body never arrives.
+      factory: simple
       connect-timeout: 2s
       read-timeout: 5s
 

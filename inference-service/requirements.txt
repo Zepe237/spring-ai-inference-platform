@@ -3,3 +3,5 @@ uvicorn[standard]==0.54.0
 pydantic==2.14.1
 # CPU build of PyTorch (installed from the PyTorch index, see Dockerfile and CI)
 torch==2.12.1
+# torch warns at startup when NumPy is missing
+numpy>=2.1
